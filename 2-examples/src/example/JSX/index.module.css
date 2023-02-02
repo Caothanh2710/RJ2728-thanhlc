@@ -1,0 +1,18 @@
+.div_header {
+    background-color: gray;
+    padding: 15px;
+    height: 80px;
+  }
+  .div_the {
+    border-bottom: 2px solid gray;
+  }
+  .div_right {
+    background-color: aqua;
+  }
+  .div_footer {
+    background-color: gray;
+    padding: 15px;
+    height: 80px;
+    text-align: center;
+  }
+  

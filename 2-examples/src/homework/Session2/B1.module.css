@@ -1,0 +1,9 @@
+
+.div_so {
+    flex: 0.2;   
+    align-items: center;
+    justify-content: center;
+}
+.w__500 {
+    width: 800px;
+}
