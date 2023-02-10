@@ -1,9 +1,3 @@
-import React from 'react'
+import { trace } from "console";
 
-type Props = {}
-
-const Listuser = (props: Props) => {
-  return (
-    <div>Listuser</div>
-  )
-}
+trace

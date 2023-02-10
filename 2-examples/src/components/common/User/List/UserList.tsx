@@ -1,6 +1,5 @@
-import { Agent } from "https";
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 interface IUser {
@@ -8,9 +7,9 @@ interface IUser {
   age: number;
   id: number | string;
 }
-// Cách để set màu cho 1 biến
-function Changecolor(props: Props) {
-  const [colorState, setColorState] = useState<string>("green");
+
+const UserList = (props: Props) => {
+    const navigate = useNavigate();
   const [listUser, setListUser] = useState<Array<IUser>>([
     {
       name: "user 1",
@@ -21,9 +20,8 @@ function Changecolor(props: Props) {
   useEffect(() => {
     getListUser();
   }, []);
-
   const getListUser = () => {
-    const url = "https://63a06c13e3113e5a5c3d3238.mockapi.io/Users";
+    const url = "https://63a06c13e3113e5a5c3d3238.mockapi.io/Users";    
     fetch(url, {
       method: "GET",
     })
@@ -31,23 +29,6 @@ function Changecolor(props: Props) {
       .then((data) => {
         console.log("Success:", data);
         setListUser(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-  const createListUser = () => {
-    const data = {};
-    fetch("https://example.com/profile", {
-      method: "POST", // or 'PUT' (phải có phần tử header, body)
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -68,42 +49,13 @@ function Changecolor(props: Props) {
         console.error("Error:", error);
       });
   };
-
-  const onClickRed = () => {
-    setColorState("red");
+  const handleDetail = (userId: string | number) => {
+    console.log("handleDetail", userId);
+    navigate ('/detail/' + userId) ;
   };
-  const onClickBlue = () => {
-    setColorState("blue");
-  };
-  const user = {
-    name: "user object",
-    age: 18,
-  };
-  // const listUser = [
-  //   {
-  //     name: "user 1",
-  //     age: 18,
-  //   },
-  //   {
-  //     name: "user 2",
-  //     age: 19,
-  //   },
-  //   {
-  //     name: "user 3",
-  //     age: 20,
-  //   },
-  // ];
-
   return (
     <>
-      <div style={{ color: colorState }}>Changecolor</div>
-      <button onClick={onClickRed} disabled={colorState === "red"}>
-        red
-      </button>
-      <button onClick={onClickBlue} disabled={colorState !== "red"}>
-        blue
-      </button>
-
+    <h1 style={{textAlign : "center"}}>LIST</h1>
       <table className="table">
         <thead>
           <tr>
@@ -126,7 +78,7 @@ function Changecolor(props: Props) {
               <td>{item.name}</td>
               <td>{item.age}</td>
               <td>
-                <button>Detail</button>
+                <button onClick={() => handleDetail(item.id)}>Detail</button>
                 <button onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
             </tr>
@@ -135,6 +87,5 @@ function Changecolor(props: Props) {
       </table>
     </>
   );
-}
-
-export default Changecolor;
+};
+export default UserList;
