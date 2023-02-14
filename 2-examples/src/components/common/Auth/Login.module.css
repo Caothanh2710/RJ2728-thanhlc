@@ -1,0 +1,26 @@
+.login {
+  background-image: url(https://hanoispiritofplace.com/wp-content/uploads/2017/06/hinh-nen-lien-minh-huyen-thoai-106.jpg);
+  width: 1350px;
+  height: 900px;
+ 
+}
+.set {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  font-size: 20px;
+}
+.hop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    padding-top: 100px;
+}

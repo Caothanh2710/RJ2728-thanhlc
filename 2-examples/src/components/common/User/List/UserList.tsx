@@ -1,3 +1,4 @@
+import { log } from "console";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,22 +7,18 @@ interface IUser {
   name: string;
   age: number;
   id: number | string;
+  img: string;
 }
 
 const UserList = (props: Props) => {
-    const navigate = useNavigate();
-  const [listUser, setListUser] = useState<Array<IUser>>([
-    {
-      name: "user 1",
-      age: 18,
-      id: 1,
-    },
-  ]);
+  const navigate = useNavigate();
+  const [listUser, setListUser] = useState<Array<IUser>>([]);
   useEffect(() => {
     getListUser();
   }, []);
   const getListUser = () => {
-    const url = "https://63a06c13e3113e5a5c3d3238.mockapi.io/Users";    
+    const url = "https://63a06c13e3113e5a5c3d3238.mockapi.io/Users";
+
     fetch(url, {
       method: "GET",
     })
@@ -51,33 +48,48 @@ const UserList = (props: Props) => {
   };
   const handleDetail = (userId: string | number) => {
     console.log("handleDetail", userId);
-    navigate ('/detail/' + userId) ;
+    navigate("/detail/" + userId);
   };
+
+  const handleUpdate = (userId: string | number) => {
+    navigate("/form/" + userId);
+  };
+
   return (
     <>
-    <h1 style={{textAlign : "center"}}>LIST</h1>
-      <table className="table">
+      <h1 style={{ textAlign: "center" }}>LIST</h1>
+      <table
+        className="table table table-dark"
+        style={{ margin: 50, width: 1200 }}
+      >
         <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Age</th>
-            <th scope="col">Handle</th>
+            <th scope="col" style={{ textAlign: "center" }}>
+              Img
+            </th>
+            <th scope="col" style={{ textAlign: "center" }}>
+              Handle
+            </th>
           </tr>
         </thead>
         <tbody>
-          {/* <tr>
-            <th scope="row">1</th>
-            <td>{user.name}</td>
-            <td>{user.age}</td>
-            <td>@mdo</td>
-          </tr> */}
           {listUser.map((item, index) => (
             <tr key={`user-${item.id}`}>
               <th scope="row">{item.id}</th>
               <td>{item.name}</td>
               <td>{item.age}</td>
-              <td>
+              <td style={{ textAlign: "center" }}>
+                <img
+                  style={{ height: 100, width: "auto" }}
+                  src={item.img}
+                  alt=""
+                />
+              </td>
+              <td style={{ textAlign: "center" }}>
+                <button onClick={() => handleUpdate(item.id)}>Update</button>
                 <button onClick={() => handleDetail(item.id)}>Detail</button>
                 <button onClick={() => handleDelete(item.id)}>Delete</button>
               </td>
